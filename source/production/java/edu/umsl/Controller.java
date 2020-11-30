@@ -51,9 +51,15 @@ public class Controller {
         controller.start(factory, 5);
 
         // Output word counts to the console
-        System.out.println("Here are the words encountered across 1000 random wikipedia pages, and their frequency: \n");
+        System.out.println("\nHere are the words encountered across 1000 random wikipedia pages, and their frequency: \n");
         for (Map.Entry<String, Integer> entry : Crawler.getWordCounts().entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+
+        // Output titles of pages crawled to the console
+        System.out.println("\nHere are the pages that were crawled:\n");
+        for (String title : Crawler.getPageTitles()) {
+            System.out.println(title);
         }
     }
 }

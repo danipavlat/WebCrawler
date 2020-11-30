@@ -2,9 +2,7 @@ package edu.umsl;
 
 import edu.uci.ics.crawler4j.crawler.Page;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
@@ -23,6 +21,9 @@ public class Crawler extends WebCrawler {
     @Setter
     // For word counts across all 1000 wikipedia pages
     private static Map<String, Integer> wordCounts = new HashMap<>();
+
+    @Getter
+    private static List<String> pageTitles = new ArrayList<>();
 
     // Specifies whether the given url should be crawled or not
     // (Only non-image wikipedia links are to be crawled)
@@ -45,6 +46,7 @@ public class Crawler extends WebCrawler {
         if (page.getParseData() instanceof HtmlParseData) {
 
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
+            pageTitles.add(htmlParseData.getTitle());
             String text = htmlParseData.getText();
 
             // Removes image urls, other urls
